@@ -39,18 +39,37 @@ class App extends Component {
 
   render() {
 
+    // Incomplete Tasks
     const incompleteTasks = this.state.tasks.filter(task => {
       return task.complete === false;
     });
 
+    // Complete Tasks
     const completeTasks = this.state.tasks.filter(task => {
       return task.complete === true;
     });
 
+    // Add New Task
+    const addNewTask = (name, date) => {
+      const newTask = {
+      id: uuid(),
+      taskName: name,
+      complete: false,
+      dueDate: date,
+      };
+      
+      const copyOfTasks = this.state.tasks.slice();
+      copyOfTasks.push(newTask)
+      
+      this.setState({
+      tasks: copyOfTasks
+      })
+      }
+
     return (
       <div className="container">
         <Header />
-        <AddTask />
+        <AddTask addNewTaskFunc={addNewTask} />
         <OutstandingCount count={incompleteTasks.length} />
         <h2>Todo:</h2>
         {incompleteTasks.map(task => {

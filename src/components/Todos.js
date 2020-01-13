@@ -5,10 +5,10 @@ class Todos extends Component {
     return (
       <div className="row">
         <div className="col-12 col-sm-4">
-          <p>Todo</p>
+        <p>{this.props.taskName}</p>
         </div>
         <div className="col-12 col-sm-2">
-          <p>DueDate</p>
+        <p>{this.props.dueDate}</p>
         </div>
         <div className="col-12 col-sm-4">
           {this.props.complete === false ? <button className="btn btn-primary">Mark Complete</button> : <button className="btn btn-primary" disabled>Complete</button>}
