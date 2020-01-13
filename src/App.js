@@ -38,12 +38,22 @@ class App extends Component {
   }
 
   render() {
+
+    const incompleteTasks = this.state.tasks.filter(task => {
+      return task.complete === false;
+    });
+
+    const completeTasks = this.state.tasks.filter(task => {
+      return task.complete === true;
+    });
+
     return (
       <div className="container">
         <Header />
         <AddTask />
         <OutstandingCount />
-        {this.state.tasks.map(task => {
+        <h2>Todo:</h2>
+        {incompleteTasks.map(task => {
           return <Todos
             key={task.id}
             taskName={task.taskName}
@@ -52,8 +62,16 @@ class App extends Component {
             id={task.id}
           />
         })}
-      
-
+        <h2>Done:</h2>
+        {completeTasks.map(task => {
+          return <Todos
+            key={task.id}
+            taskName={task.taskName}
+            dueDate={task.dueDate}
+            complete={task.complete}
+            id={task.id}
+          />
+        })}
       </div>
     );
   }
