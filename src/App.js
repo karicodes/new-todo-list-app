@@ -52,19 +52,32 @@ class App extends Component {
     // Add New Task
     const addNewTask = (name, date) => {
       const newTask = {
-      id: uuid(),
-      taskName: name,
-      complete: false,
-      dueDate: date,
+        id: uuid(),
+        taskName: name,
+        complete: false,
+        dueDate: date,
       };
-      
+
       const copyOfTasks = this.state.tasks.slice();
       copyOfTasks.push(newTask)
-      
+
       this.setState({
-      tasks: copyOfTasks
+        tasks: copyOfTasks
       })
-      }
+    }
+
+    // Delete Task
+    const deleteTask = (id) => {
+      const filteredTasks = this.state.tasks.filter(task => {
+        if (task.id === id) {
+          return false;
+        } else return true;
+      })
+
+      this.setState({
+        tasks: filteredTasks
+      })
+    }
 
     return (
       <div className="container">
@@ -79,6 +92,7 @@ class App extends Component {
             dueDate={task.dueDate}
             complete={task.complete}
             id={task.id}
+            deleteTaskFunc={deleteTask}
           />
         })}
         <h2>Done:</h2>
@@ -89,6 +103,7 @@ class App extends Component {
             dueDate={task.dueDate}
             complete={task.complete}
             id={task.id}
+            deleteTaskFunc={deleteTask}
           />
         })}
       </div>
