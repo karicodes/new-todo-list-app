@@ -51,7 +51,7 @@ class App extends Component {
       <div className="container">
         <Header />
         <AddTask />
-        <OutstandingCount />
+        <OutstandingCount count={incompleteTasks.length} />
         <h2>Todo:</h2>
         {incompleteTasks.map(task => {
           return <Todos

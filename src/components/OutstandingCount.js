@@ -4,7 +4,7 @@ class OutstandingCount extends Component {
   render() {
     return (
       <div>
-          <h3>There are X task outstanding!</h3>
+          <h3>Outstanding Tasks: <span>{this.props.count}</span></h3>
       </div >
     );
   }
