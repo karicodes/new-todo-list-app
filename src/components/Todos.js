@@ -6,6 +6,10 @@ class Todos extends Component {
     this.props.deleteTaskFunc(this.props.id)
   }
 
+  handleMarkComplete = () => {
+    this.props.markCompleteFunc(this.props.id)
+  }
+
   render() {
     return (
       <div className="row">
@@ -16,10 +20,12 @@ class Todos extends Component {
           <p>{this.props.dueDate}</p>
         </div>
         <div className="col-12 col-sm-4">
-          {this.props.complete === false ? <button className="btn btn-primary">Mark Complete</button> : <button className="btn btn-primary" disabled>Complete</button>}
+          {this.props.complete === false ? <button className="btn btn-primary"
+            onClick={this.handleMarkComplete} >Mark Complete</button> : <button className="btn btn-primary" disabled>Complete</button>}
         </div>
         <div className="col-12 col-sm-2">
-          <button className="btn btn-danger" onClick={this.handleDelete} >Delete</button>
+          <button className="btn btn-danger"
+            onClick={this.handleDelete} >Delete</button>
         </div >
       </div >
     );

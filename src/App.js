@@ -79,6 +79,19 @@ class App extends Component {
       })
     }
 
+    // Mark task complete
+    const markComplete = (id) => {
+      const filteredTasks = this.state.tasks.map(task => {
+        if (task.id === id) return { ...task, complete: true };
+        else return task;
+      })
+
+      this.setState({
+        tasks: filteredTasks
+      })
+
+    }
+
     return (
       <div className="container">
         <Header />
@@ -93,6 +106,7 @@ class App extends Component {
             complete={task.complete}
             id={task.id}
             deleteTaskFunc={deleteTask}
+            markCompleteFunc={markComplete}
           />
         })}
         <h2>Done:</h2>
