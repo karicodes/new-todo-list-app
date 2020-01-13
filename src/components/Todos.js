@@ -11,7 +11,7 @@ class Todos extends Component {
           <p>DueDate</p>
         </div>
         <div className="col-12 col-sm-4">
-          <button className="btn btn-primary">Mark Complete</button>
+          {this.props.complete === false ? <button className="btn btn-primary">Mark Complete</button> : <button className="btn btn-primary" disabled>Complete</button>}
         </div>
         <div className="col-12 col-sm-2">
           <button className="btn btn-danger" >Delete</button>
