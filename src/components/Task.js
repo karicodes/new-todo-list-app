@@ -23,9 +23,6 @@ class Task extends Component {
   }
 
   render() {
-
-    console.log(this.props)
-
     return (
       <div className="row">
         <div className="col-12 col-sm-3">
@@ -52,19 +49,19 @@ class Task extends Component {
           {this.props.editModeOn
             ? (
             <button
-              className="btn btn-secondary"
+              className="btn btn-outline-secondary"
               onClick={() => this.props.updateTask(this.props.id, this.state.taskName, this.state.dueDate)}>
                 Update
             </button>
-            ) : <button className="btn btn-primary" onClick={this.handleEditTask}>Edit</button>}
+            ) : <button className="btn btn-outline-primary" onClick={this.handleEditTask}>Edit</button>}
         </div>        
         <div className="col-12 col-sm-2">
           {!this.props.complete
-            ? <button className="btn btn-primary" onClick={this.handleMarkComplete} >Mark Complete</button>
-            : <button className="btn btn-primary" disabled>Complete</button>}
+            ? <button className="btn btn-outline-success" onClick={this.handleMarkComplete} >Mark Complete</button>
+            : <button className="btn btn-outline-success" disabled>Complete</button>}
         </div>
         <div className="col-12 col-sm-2">
-          <button className="btn btn-danger" onClick={this.handleDelete} >Delete</button>
+          <button className="btn btn-outline-danger" onClick={this.handleDelete} >Delete</button>
         </div >
       </div >
     );

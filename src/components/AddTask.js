@@ -1,50 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class AddTask extends Component {
-    state = {
-        taskName: "",
-        dueDate: "0000-00-00"
+function AddTask(props) {
+	const [taskName, setTaskName] = useState("");
+	const [dueDate, setDueDate] = useState("");
 
-    };
-    updateTaskName = (event) => {
-        this.setState({
-            taskName: event.target.value
-        });
-    }
+	function updateTaskName (event) {
+		setTaskName(event.target.value)
+	}
 
-    updateDueDate = (event) => {
-        this.setState({
-            dueDate: event.target.value
-        })
-    }
+	function updateDueDate (event) {
+		setDueDate(event.target.value)
+	}
 
-    handleAdd = (event) => {
-        this.props.addNewTask(this.state.taskName, this.state.dueDate);
-    }
-
-    render() {
-        return (
-            <div className="row">
-                <div className="col-sm-4">
-                    <input type="text"
-                        onChange={this.updateTaskName}
-                        value={this.state.taskName}
-                        className="form-control"
-                        placeholder="Enter task" />
-                </div>
-                <div className="col-sm-4">
-                    <input type="date"
-                        className="form-control"
-                        onChange={this.updateDueDate}
-                        value={this.state.dueDate} />
-                </div>
-                <div className="col-sm-4">
-                    <button onClick={this.handleAdd}
-                    className="btn btn-primary">Add</button>
-                </div>
-            </div>
-        );
-    }
+	function handleAdd () {
+		props.addNewTask(taskName, dueDate);
+	}
+	
+	return (
+		<div className="row">
+			<div className="col-sm-4">
+				<input type="text"
+					onChange={updateTaskName}
+					value={taskName}
+					className="form-control"
+					placeholder="Enter task" />
+			</div>
+			<div className="col-sm-4">
+				<input type="date"
+					className="form-control"
+					onChange={updateDueDate}
+					value={dueDate} />
+			</div>
+			<div className="col-sm-4">
+				<button onClick={handleAdd}
+					className="btn btn-primary">Add</button>
+			</div>
+		</div>
+	)
 }
 
 export default AddTask;

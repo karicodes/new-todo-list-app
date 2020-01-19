@@ -1,13 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class OutstandingCount extends Component {
-  render() {
-    return (
-      <div>
-          <h3>Outstanding Tasks: <span>{this.props.count}</span></h3>
-      </div >
-    );
-  }
+function OutstandingCount(props) {
+  return <h3>Outstanding Tasks: <span>{props.count}</span></h3>
 }
 
 export default OutstandingCount;

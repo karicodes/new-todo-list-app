@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v4';
 import Header from './components/Header';
 import AddTask from './components/AddTask';
 import OutstandingCount from './components/OutstandingCount';
 import Task from './components/Task';
-import './App.css';
-import uuid from 'uuid/v4';
+import { SectionHeader } from './App.styles';
 
 class App extends Component {
 
@@ -100,7 +100,7 @@ class App extends Component {
         <Header />
         <AddTask addNewTask={this.addNewTask} />
         <OutstandingCount count={incompleteTasks.length} />
-        <h2>Todo:</h2>
+        <SectionHeader>Todo</SectionHeader>
         {!incompleteTasks.length && <h1>You have no outstanding tasks. Add one above!</h1>}
         {incompleteTasks.map(task => {
           return <Task
@@ -116,7 +116,7 @@ class App extends Component {
             markComplete={this.markComplete}
           />
         })}
-        <h2>Done:</h2>
+        <SectionHeader>Done</SectionHeader>
         {!completeTasks.length && <h1>You do not have any complete tasks. Get to work!</h1>}
         {completeTasks.map(task => {
           return <Task
