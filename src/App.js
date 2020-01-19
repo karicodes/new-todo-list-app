@@ -58,7 +58,7 @@ class App extends Component {
   }
 
   deleteTask = (id) => {
-    const filteredTasks = this.state.tasks.filter(task => !task.id === id)
+    const filteredTasks = this.state.tasks.filter(task => !(task.id === id))
 
     this.setState({ tasks: filteredTasks })
   }
