@@ -98,6 +98,7 @@ class App extends Component {
         <AddTask addNewTaskFunc={addNewTask} />
         <OutstandingCount count={incompleteTasks.length} />
         <h2>Todo:</h2>
+        {!incompleteTasks.length && <h1>You have no outstanding tasks. Add one above!</h1>}
         {incompleteTasks.map(task => {
           return <Todos
             key={task.id}
@@ -110,6 +111,7 @@ class App extends Component {
           />
         })}
         <h2>Done:</h2>
+        {!completeTasks.length && <h1>You do not have any complete tasks. Get to work!</h1>}
         {completeTasks.map(task => {
           return <Todos
             key={task.id}
