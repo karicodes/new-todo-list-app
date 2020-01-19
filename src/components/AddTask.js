@@ -4,6 +4,7 @@ class AddTask extends Component {
     state = {
         taskName: "",
         dueDate: "0000-00-00"
+
     };
     updateTaskName = (event) => {
         this.setState({
@@ -18,7 +19,7 @@ class AddTask extends Component {
     }
 
     handleAdd = (event) => {
-        this.props.addNewTaskFunc(this.state.taskName, this.state.dueDate);
+        this.props.addNewTask(this.state.taskName, this.state.dueDate);
     }
 
     render() {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import AddTask from './components/AddTask';
 import OutstandingCount from './components/OutstandingCount';
-import Todos from './components/Todos';
+import Task from './components/Task';
 import './App.css';
 import uuid from 'uuid/v4';
 
@@ -14,112 +14,121 @@ class App extends Component {
         id: uuid(),
         taskName: "Learn HTML",
         complete: true,
-        dueDate: "2019-11-28"
+        dueDate: "2019-11-28",
+        editModeOn: false,
       },
       {
         id: uuid(),
         taskName: "Learn CSS",
         complete: true,
-        dueDate: "2019-12-02"
+        dueDate: "2019-12-02",
+        editModeOn: false,
       },
       {
         id: uuid(),
         taskName: "Learn JavaScript",
         complete: true,
-        dueDate: "2019-11-11"
+        dueDate: "2019-11-11",
+        editModeOn: false,
       },
       {
         id: uuid(),
         taskName: "Learn React",
         complete: false,
-        dueDate: "2020-01-06"
+        dueDate: "2020-01-06",
+        editModeOn: false,
       }
     ]
   }
 
+
+  addNewTask = (name, date) => {
+    const newTask = {
+      id: uuid(),
+      taskName: name,
+      complete: false,
+      dueDate: date,
+      editModeOn: false,
+    };
+
+    const copyOfTasks = this.state.tasks.slice();
+    copyOfTasks.push(newTask)
+
+    this.setState({ tasks: copyOfTasks })
+  }
+
+  deleteTask = (id) => {
+    const filteredTasks = this.state.tasks.filter(task => !task.id === id)
+
+    this.setState({ tasks: filteredTasks })
+  }
+
+  markComplete = (id) => {
+    const updatedTasks = this.state.tasks.map(task =>
+      task.id === id ? { ...task, complete: true } : task)
+
+    this.setState({ tasks: updatedTasks });
+  }
+
+  editTask = (id) => {
+    const updatedTasks = this.state.tasks.map(task =>
+      task.id === id ? { ...task, editModeOn: true } : task)
+
+    this.setState({ tasks: updatedTasks })
+  }
+
+  updateTask = (id, name, date) => {
+    console.log(name, date)
+    const updatedTasks = this.state.tasks.map(task =>
+      task.id === id ? { ...task, taskName: name, dueDate: date, editModeOn: false } : task)
+
+    this.setState({ tasks: updatedTasks })
+  }
+
   render() {
 
-    // Incomplete Tasks
     const incompleteTasks = this.state.tasks.filter(task => {
       return task.complete === false;
     });
 
-    // Complete Tasks
     const completeTasks = this.state.tasks.filter(task => {
       return task.complete === true;
     });
 
-    // Add New Task
-    const addNewTask = (name, date) => {
-      const newTask = {
-        id: uuid(),
-        taskName: name,
-        complete: false,
-        dueDate: date,
-      };
-
-      const copyOfTasks = this.state.tasks.slice();
-      copyOfTasks.push(newTask)
-
-      this.setState({
-        tasks: copyOfTasks
-      })
-    }
-
-    // Delete Task
-    const deleteTask = (id) => {
-      const filteredTasks = this.state.tasks.filter(task => {
-        if (task.id === id) {
-          return false;
-        } else return true;
-      })
-
-      this.setState({
-        tasks: filteredTasks
-      })
-    }
-
-    // Mark task complete
-    const markComplete = (id) => {
-      const filteredTasks = this.state.tasks.map(task => {
-        if (task.id === id) return { ...task, complete: true };
-        else return task;
-      })
-
-      this.setState({
-        tasks: filteredTasks
-      })
-
-    }
-
     return (
       <div className="container">
         <Header />
-        <AddTask addNewTaskFunc={addNewTask} />
+        <AddTask addNewTask={this.addNewTask} />
         <OutstandingCount count={incompleteTasks.length} />
         <h2>Todo:</h2>
         {!incompleteTasks.length && <h1>You have no outstanding tasks. Add one above!</h1>}
         {incompleteTasks.map(task => {
-          return <Todos
+          return <Task
             key={task.id}
             taskName={task.taskName}
             dueDate={task.dueDate}
             complete={task.complete}
             id={task.id}
-            deleteTaskFunc={deleteTask}
-            markCompleteFunc={markComplete}
+            editModeOn={task.editModeOn}
+            editTask={this.editTask}
+            updateTask={this.updateTask}
+            deleteTask={this.deleteTask}
+            markComplete={this.markComplete}
           />
         })}
         <h2>Done:</h2>
         {!completeTasks.length && <h1>You do not have any complete tasks. Get to work!</h1>}
         {completeTasks.map(task => {
-          return <Todos
+          return <Task
             key={task.id}
             taskName={task.taskName}
             dueDate={task.dueDate}
             complete={task.complete}
             id={task.id}
-            deleteTaskFunc={deleteTask}
+            editModeOn={task.editModeOn}
+            editTask={this.editTask}
+            updateTask={this.updateTask}
+            deleteTask={this.deleteTask}
           />
         })}
       </div>
