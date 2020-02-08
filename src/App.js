@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uuid from 'uuid/v4';
+// import uuid from 'uuid/v4';
 import axios from 'axios';
 import Header from './components/Header';
 import AddTask from './components/AddTask';
@@ -29,12 +29,19 @@ class App extends Component {
 
   addNewTask = (name, date) => {
     const newTask = {
-      taskId: uuid(),
       task_name: name,
       complete: false,
       due_date: date,
-      editModeOn: false,
+
     };
+
+    axios.post("https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks", newTask)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 
     const copyOfTasks = this.state.tasks.slice();
     copyOfTasks.push(newTask)
@@ -87,10 +94,10 @@ class App extends Component {
         <OutstandingCount count={incompleteTasks.length} />
         <SectionHeader>Todo</SectionHeader>
         {!incompleteTasks.length && <h1>You have no outstanding tasks. Add one above!</h1>}
-        {incompleteTasks.map(task => {
+        {incompleteTasks.map((task, idx) => {
           return <Task
-            key={task.taskId}
-            task_name={task.task_name}
+          key={`${task.task_name} ${idx}`}
+          task_name={task.task_name}
             due_date={task.due_date}
             complete={task.complete}
             taskId={task.taskId}
@@ -103,9 +110,9 @@ class App extends Component {
         })}
         <SectionHeader>Done</SectionHeader>
         {!completeTasks.length && <h1>You do not have any complete tasks. Get to work!</h1>}
-        {completeTasks.map(task => {
+        {completeTasks.map((task, idx) => {
           return <Task
-            key={task.taskId}
+            key={`${task.task_name} ${idx}`}
             task_name={task.task_name}
             due_date={task.due_date}
             complete={task.complete}
