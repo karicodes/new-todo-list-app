@@ -17,9 +17,8 @@ class App extends Component {
     axios.get("https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks")
       .then((response) => {
         const tasks = response.data.tasks;
-        const boolTasks = tasks.map(task => ({ ...task, complete: task.complete === 0 ? false : true }))
         this.setState({
-          tasks: boolTasks
+          tasks: tasks
         })
       })
       .catch((err) => {
@@ -32,21 +31,21 @@ class App extends Component {
       task_name: name,
       complete: false,
       due_date: date,
-
     };
 
     axios.post("https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks", newTask)
     .then((response) => {
-      console.log(response);
+      const newTodo = response.data;
+      const copyOfTasks = this.state.tasks.slice();
+      copyOfTasks.push(newTodo);
+  
+      this.setState({ 
+        tasks: copyOfTasks 
+      });    
     })
     .catch((err) => {
       console.log(err);
-    })
-
-    const copyOfTasks = this.state.tasks.slice();
-    copyOfTasks.push(newTask)
-
-    this.setState({ tasks: copyOfTasks })
+    });
   }
 
   deleteTask = (taskId) => {

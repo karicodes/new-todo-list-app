@@ -14,6 +14,8 @@ function AddTask(props) {
 
 	function handleAdd () {
 		props.addNewTask(task_name, due_date);
+		setTaskName("");
+		setDueDate("");
 	}
 	
 	return (
