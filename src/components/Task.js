@@ -4,22 +4,22 @@ class Task extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      taskName: props.taskName,
-      dueDate: props.dueDate
+      task_name: props.task_name,
+      due_date: props.due_date
     };
   }
   
 
   handleDelete = () => {
-    this.props.deleteTask(this.props.id)
+    this.props.deleteTask(this.props.taskId)
   }
 
   handleMarkComplete = () => {
-    this.props.markComplete(this.props.id)
+    this.props.markComplete(this.props.taskId)
   }
 
   handleEditTask = () => {
-    this.props.editTask(this.props.id)
+    this.props.editTask(this.props.taskId)
   }
 
   render() {
@@ -30,27 +30,27 @@ class Task extends Component {
           ? (
           <input
             type='text'
-            value={this.state.taskName}
-            onChange={e => this.setState({taskName:e.target.value})}
+            value={this.state.task_name}
+            onChange={e => this.setState({task_name:e.target.value})}
             className="form-control"/>
-          ) : <p>{this.props.taskName}</p>}
+          ) : <p>{this.props.task_name}</p>}
         </div>
         <div className="col-12 col-sm-3">
           {this.props.editModeOn
           ? (
           <input
           type='date'
-          value={this.state.dueDate}
-          onChange={e => this.setState({dueDate:e.target.value})}
+          value={this.state.due_date}
+          onChange={e => this.setState({due_date:e.target.value})}
           className="form-control"/>
-          ): <p>{this.props.dueDate}</p>}
+          ): <p>{this.props.due_date}</p>}
         </div>
         <div className="col-12 col-sm-2">
           {this.props.editModeOn
             ? (
             <button
               className="btn btn-outline-secondary"
-              onClick={() => this.props.updateTask(this.props.id, this.state.taskName, this.state.dueDate)}>
+              onClick={() => this.props.updateTask(this.props.taskId, this.state.task_name, this.state.due_date)}>
                 Update
             </button>
             ) : <button className="btn btn-outline-primary" onClick={this.handleEditTask}>Edit</button>}

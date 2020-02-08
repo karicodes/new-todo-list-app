@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 function AddTask(props) {
-	const [taskName, setTaskName] = useState("");
-	const [dueDate, setDueDate] = useState("");
+	const [task_name, setTaskName] = useState("");
+	const [due_date, setDueDate] = useState("");
 
 	function updateTaskName (event) {
 		setTaskName(event.target.value)
@@ -13,7 +13,7 @@ function AddTask(props) {
 	}
 
 	function handleAdd () {
-		props.addNewTask(taskName, dueDate);
+		props.addNewTask(task_name, due_date);
 	}
 	
 	return (
@@ -21,7 +21,7 @@ function AddTask(props) {
 			<div className="col-sm-4">
 				<input type="text"
 					onChange={updateTaskName}
-					value={taskName}
+					value={task_name}
 					className="form-control"
 					placeholder="Enter task" />
 			</div>
@@ -29,7 +29,7 @@ function AddTask(props) {
 				<input type="date"
 					className="form-control"
 					onChange={updateDueDate}
-					value={dueDate} />
+					value={due_date} />
 			</div>
 			<div className="col-sm-4">
 				<button onClick={handleAdd}
