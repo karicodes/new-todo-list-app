@@ -83,12 +83,23 @@ class App extends Component {
     this.setState({ tasks: updatedTasks })
   }
 
-  updateTask = (taskId, name, date) => {
-    console.log(name, date)
-    const updatedTasks = this.state.tasks.map(task =>
-      task.taskId === taskId ? { ...task, task_name: name, due_date: date, editModeOn: false } : task)
+  updateTask = (taskId, name, date, complete) => {
+    axios.put(`https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks/${taskId}`, {
+      task_name: name,
+      due_date: date,
+      complete: complete,
+    })
+      .then(() => {
+        const updatedTasks = this.state.tasks.map(task =>
+          task.taskId === taskId ? { ...task, task_name: name, due_date: date, editModeOn: false } : task)
 
-    this.setState({ tasks: updatedTasks })
+        this.setState({
+          tasks: updatedTasks
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render() {
