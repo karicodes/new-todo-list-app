@@ -60,10 +60,12 @@ class App extends Component {
       })
   }
 
-  markComplete = (taskId) => {
+  markComplete = (taskId, name, date) => {
 
     axios.put(`https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks/${taskId}`, {
-      complete: true
+      task_name: name,
+      due_date: date,
+      complete: true,
     })
       .then(() => {
         const updatedTasks = this.state.tasks.map(task =>

@@ -15,7 +15,7 @@ class Task extends Component {
   }
 
   handleMarkComplete = () => {
-    this.props.markComplete(this.props.taskId)
+    this.props.markComplete(this.props.taskId, this.state.task_name, this.state.due_date)
   }
 
   handleEditTask = () => {
