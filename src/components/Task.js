@@ -34,7 +34,7 @@ class Task extends Component {
   render() {
     return (
       <Row className="row">
-        <div className="col-12 col-sm-3">
+        <div className="col-6 col-sm-3">
           {this.props.editModeOn
           ? (
           <input
@@ -44,7 +44,7 @@ class Task extends Component {
             className="form-control"/>
           ) : <p>{this.props.task_name}</p>}
         </div>
-        <div className="col-12 col-sm-3">
+        <div className="col-6 col-sm-3">
           {this.props.editModeOn
           ? (
           <input
@@ -54,7 +54,7 @@ class Task extends Component {
           className="form-control"/>
           ) : <p>{moment(this.props.due_date).format("Do MMMM YYYY")}</p>}
         </div>
-        <div className="col-12 col-sm-2">
+        <div className="col-4 col-sm-2">
           {this.props.editModeOn
             ? (
             <button
@@ -64,12 +64,12 @@ class Task extends Component {
             </button>
             ) : <button className="btn btn-outline-primary" onClick={this.handleEditTask}>Edit</button>}
         </div>        
-        <div className="col-12 col-sm-2">
+        <div className="col-4 col-sm-2">
           {!this.props.complete
             ? <button className="btn btn-outline-success" onClick={this.handleMarkComplete} >Mark Complete</button>
             : <button className="btn btn-outline-success" disabled>Complete</button>}
         </div>
-        <div className="col-12 col-sm-2">
+        <div className="col-4 col-sm-2">
           <button className="btn btn-outline-danger" onClick={this.handleDelete} >Delete</button>
         </div >
       </Row >
