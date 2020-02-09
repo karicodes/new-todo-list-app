@@ -49,9 +49,15 @@ class App extends Component {
   }
 
   deleteTask = (taskId) => {
-    const filteredTasks = this.state.tasks.filter(task => !(task.taskId === taskId))
+    axios.delete(`https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks/${taskId}`)
+    .then((response) => {
+      const filteredTasks = this.state.tasks.filter(task => !(task.taskId === taskId))
 
-    this.setState({ tasks: filteredTasks })
+      this.setState({ tasks: filteredTasks })
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   markComplete = (taskId) => {
