@@ -5,7 +5,7 @@ import Header from './components/Header';
 import AddTask from './components/AddTask';
 import OutstandingCount from './components/OutstandingCount';
 import Task from './components/Task';
-import { SectionHeader } from './App.styles';
+import { SectionHeader, Container } from './App.styles';
 
 class App extends Component {
 
@@ -116,7 +116,7 @@ class App extends Component {
     });
 
     return (
-      <div className="container">
+      <Container className="container">
         <Header />
         <AddTask addNewTask={this.addNewTask} />
         <OutstandingCount count={incompleteTasks.length} />
@@ -151,7 +151,7 @@ class App extends Component {
             deleteTask={this.deleteTask}
           />
         })}
-      </div>
+      </Container>
     );
   }
 }

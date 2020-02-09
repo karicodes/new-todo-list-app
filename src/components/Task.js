@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import styled from 'styled-components';
+
+const Row = styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  `
+
 
 class Task extends Component {
   constructor(props) {
@@ -25,7 +33,7 @@ class Task extends Component {
 
   render() {
     return (
-      <div className="row">
+      <Row className="row">
         <div className="col-12 col-sm-3">
           {this.props.editModeOn
           ? (
@@ -64,7 +72,7 @@ class Task extends Component {
         <div className="col-12 col-sm-2">
           <button className="btn btn-outline-danger" onClick={this.handleDelete} >Delete</button>
         </div >
-      </div >
+      </Row >
     );
   }
 }
