@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Task extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Task extends Component {
           value={this.state.due_date}
           onChange={e => this.setState({due_date:e.target.value})}
           className="form-control"/>
-          ): <p>{this.props.due_date}</p>}
+          ) : <p>{moment(this.props.due_date).format("Do MMMM YYYY")}</p>}
         </div>
         <div className="col-12 col-sm-2">
           {this.props.editModeOn
