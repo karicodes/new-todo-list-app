@@ -34,37 +34,46 @@ class App extends Component {
     };
 
     axios.post("https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks", newTask)
-    .then((response) => {
-      const newTodo = response.data;
-      const copyOfTasks = this.state.tasks.slice();
-      copyOfTasks.push(newTodo);
-  
-      this.setState({ 
-        tasks: copyOfTasks 
-      });    
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((response) => {
+        const newTodo = response.data;
+        const copyOfTasks = this.state.tasks.slice();
+        copyOfTasks.push(newTodo);
+
+        this.setState({
+          tasks: copyOfTasks
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteTask = (taskId) => {
     axios.delete(`https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks/${taskId}`)
-    .then((response) => {
-      const filteredTasks = this.state.tasks.filter(task => !(task.taskId === taskId))
+      .then((response) => {
+        const filteredTasks = this.state.tasks.filter(task => !(task.taskId === taskId))
 
-      this.setState({ tasks: filteredTasks })
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+        this.setState({ tasks: filteredTasks })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   markComplete = (taskId) => {
-    const updatedTasks = this.state.tasks.map(task =>
-      task.taskId === taskId ? { ...task, complete: true } : task)
 
-    this.setState({ tasks: updatedTasks });
+    axios.put(`https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks/${taskId}`, {
+      complete: true
+    })
+      .then(() => {
+        const updatedTasks = this.state.tasks.map(task =>
+          task.taskId === taskId ? { ...task, complete: true } : task)
+
+        this.setState({ tasks: updatedTasks });
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   editTask = (taskId) => {
@@ -92,7 +101,7 @@ class App extends Component {
       return task.complete === true;
     });
 
-        return (
+    return (
       <div className="container">
         <Header />
         <AddTask addNewTask={this.addNewTask} />
@@ -101,8 +110,8 @@ class App extends Component {
         {!incompleteTasks.length && <h1>You have no outstanding tasks. Add one above!</h1>}
         {incompleteTasks.map((task, idx) => {
           return <Task
-          key={`${task.task_name} ${idx}`}
-          task_name={task.task_name}
+            key={`${task.task_name} ${idx}`}
+            task_name={task.task_name}
             due_date={task.due_date}
             complete={task.complete}
             taskId={task.taskId}
