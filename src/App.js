@@ -84,6 +84,7 @@ class App extends Component {
   }
 
   updateTask = (taskId, name, date, complete) => {
+    console.log(complete)
     axios.put(`https://ecq67c0xkb.execute-api.eu-west-1.amazonaws.com/dev/tasks/${taskId}`, {
       task_name: name,
       due_date: date,

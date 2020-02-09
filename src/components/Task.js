@@ -50,7 +50,7 @@ class Task extends Component {
             ? (
             <button
               className="btn btn-outline-secondary"
-              onClick={() => this.props.updateTask(this.props.taskId, this.state.task_name, this.state.due_date, this.props.completed)}>
+              onClick={() => this.props.updateTask(this.props.taskId, this.state.task_name, this.state.due_date, this.props.complete)}>
                 Update
             </button>
             ) : <button className="btn btn-outline-primary" onClick={this.handleEditTask}>Edit</button>}
