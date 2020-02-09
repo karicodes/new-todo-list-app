@@ -5,7 +5,7 @@ import Header from './components/Header';
 import AddTask from './components/AddTask';
 import OutstandingCount from './components/OutstandingCount';
 import Task from './components/Task';
-import { SectionHeader, Container } from './App.styles';
+import { SectionHeader, Container, EmptySection } from './App.styles';
 
 class App extends Component {
 
@@ -121,7 +121,7 @@ class App extends Component {
         <AddTask addNewTask={this.addNewTask} />
         <OutstandingCount count={incompleteTasks.length} />
         <SectionHeader>Todo</SectionHeader>
-        {!incompleteTasks.length && <h1>You have no outstanding tasks. Add one above!</h1>}
+        {!incompleteTasks.length && <EmptySection>You do not have any outstanding tasks. Add one above!</EmptySection>}
         {incompleteTasks.map((task, idx) => {
           return <Task
             key={`${task.task_name} ${idx}`}
@@ -137,7 +137,7 @@ class App extends Component {
           />
         })}
         <SectionHeader>Done</SectionHeader>
-        {!completeTasks.length && <h1>You do not have any complete tasks. Get to work!</h1>}
+        {!completeTasks.length && <EmptySection>You do not have any complete tasks. Get to work!</EmptySection>}
         {completeTasks.map((task, idx) => {
           return <Task
             key={`${task.task_name} ${idx}`}
